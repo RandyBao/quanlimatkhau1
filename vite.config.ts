@@ -4,7 +4,11 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
+  // Tự động kiểm tra nếu đang build trên GitHub Actions thì lấy base là /quanlimatkhau1/
+  const isGithubPages = process.env.GITHUB_ACTIONS === 'true';
+
   return {
+    base: isGithubPages ? '/quanlimatkhau/' : '/',
     plugins: [
       react(),
       tailwindcss()
@@ -15,10 +19,7 @@ export default defineConfig(() => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
