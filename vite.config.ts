@@ -8,7 +8,7 @@ export default defineConfig(() => {
   const isGithubPages = process.env.GITHUB_ACTIONS === 'true';
 
   return {
-    base: isGithubPages ? '/quanlimatkhau/' : '/',
+    base: isGithubPages ? '/quanlimatkhau1/' : '/',
     plugins: [
       react(),
       tailwindcss()
