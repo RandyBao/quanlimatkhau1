@@ -1,0 +1,17 @@
+{
+  "short_name": "Bảo Mật",
+  "name": "Kho Quản Lý Mật Khẩu Offline",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2889/2889312.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#0d1117",
+  "theme_color": "#00ff66",
+  "display": "standalone",
+  "orientation": "portrait"
+}
