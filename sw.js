@@ -1,13 +1,13 @@
-const CACHE_NAME = 'pwd-github-v3';
+const CACHE_NAME = 'pwd-github-v4';
 
-// Thêm chính xác đường dẫn kho chứa vào danh sách lưu offline
+// Sử dụng đường dẫn tương đối để điện thoại tự khớp thư mục app khi offline
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
-        '/quanlimatkhau1/',
-        '/quanlimatkhau1/index.html',
-        '/quanlimatkhau1/manifest.json'
+        './',
+        'index.html',
+        'manifest.json'
       ]);
     }).then(() => self.skipWaiting())
   );
@@ -21,15 +21,16 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
+        // Trả về file offline ngay cho mượt, đồng thời âm thầm cập nhật nếu có mạng
         fetch(event.request).then((networkResponse) => {
           if (networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
           }
-        }).catch(() => {/* Offline */});
+        }).catch(() => {/* Offline mode */});
         return cachedResponse;
       }
       return fetch(event.request).catch(() => {
-        return caches.match('/quanlimatkhau1/index.html');
+        return caches.match('index.html');
       });
     })
   );
